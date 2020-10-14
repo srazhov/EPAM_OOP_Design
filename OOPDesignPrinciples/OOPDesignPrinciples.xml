@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OOPDesignPrinciples</name>
+    </assembly>
+    <members>
+        <member name="T:OOPDesignPrinciples.IMatrix`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+    </members>
+</doc>
