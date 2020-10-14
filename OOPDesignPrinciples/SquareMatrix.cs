@@ -17,6 +17,11 @@ namespace OOPDesignPrinciples
     public class SquareMatrix<T> : IMatrix<T>
     {
         /// <summary>
+        /// Action that executes when certain element has been changed
+        /// </summary>
+        protected Action<int, int> _whenElementChanged;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SquareMatrix{T}"/> class
         /// </summary>
         /// <exception cref="ArgumentException">Array's dimensions must me equal</exception>
@@ -86,6 +91,7 @@ namespace OOPDesignPrinciples
                 }
 
                 this._matrix[x, y] = value;
+                this._whenElementChanged?.Invoke(x, y);
             }
         }
 
@@ -168,6 +174,23 @@ namespace OOPDesignPrinciples
 
                 Console.WriteLine();
             }
+        }
+
+        /// <summary>
+        /// Adds new action that happens when object with certain position gets changed
+        /// </summary>
+        /// <param name="x1">X coordinate</param>
+        /// <param name="x2">Y coordinate</param>
+        /// <param name="action">Action to execute</param>
+        public void AddActionWhenElementChanged(int x1, int x2, Action action)
+        {
+            this._whenElementChanged += (int x, int y) => 
+            { 
+                if (x == x1 && y == x2)
+                {
+                    action();
+                }
+            };
         }
     }
 }

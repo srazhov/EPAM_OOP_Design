@@ -38,6 +38,30 @@ namespace OOPDesignPrinciples
         }
 
         /// <summary>
+        /// Gets an object stored in specific position.
+        /// <para>When setting an object outside main diagonal, value will be in symmetric position too</para>
+        /// </summary>
+        /// <exception cref="ArgumentException">X and Y must be more than 0 and less than length</exception>
+        /// <param name="x">First dimension</param>
+        /// <param name="y">Second dimension</param>
+        /// <returns>Generic type</returns>
+        public override T this[int x, int y]
+        {
+            get => base[x, y];
+
+            set
+            {
+                base[x, y] = value;
+
+                if (x != y)
+                {
+                    _matrix[y, x] = value;
+                    _matrix[x, y] = value;
+                }
+            }
+        }
+
+        /// <summary>
         /// Sorting method of matrix
         /// </summary>
         protected override void SortingMethod()

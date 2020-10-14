@@ -36,6 +36,29 @@ namespace OOPDesignPrinciples
         }
 
         /// <summary>
+        /// Gets an object stored in specific position.
+        /// <para>Sets an object only in diagonal positions (X == Y)</para>
+        /// </summary>
+        /// <exception cref="ArgumentException">X and Y must be more than 0 and less than length</exception>
+        /// <param name="x">First dimension</param>
+        /// <param name="y">Second dimension</param>
+        /// <returns>Generic type</returns>
+        public override T this[int x, int y] 
+        { 
+            get => base[x, y];
+            
+            set 
+            {
+                if (x != y)
+                {
+                    value = default;
+                }
+
+                base[x, y] = value;
+            }
+        }
+
+        /// <summary>
         /// Sorting method of matrix
         /// </summary>
         protected virtual void SortingMethod()

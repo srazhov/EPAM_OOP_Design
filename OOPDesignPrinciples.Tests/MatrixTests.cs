@@ -8,6 +8,7 @@
 namespace OOPDesignPrinciples.Tests
 {
     using NUnit.Framework;
+    using System;
 
     /// <summary>
     /// Test class for <see cref="IMatrix{T}"/> interface
@@ -142,6 +143,40 @@ namespace OOPDesignPrinciples.Tests
             symmetrical.Show();
 
             Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// Test of how actions work when element changed 
+        /// </summary>
+        [Test]
+        public void TestOfActions()
+        {
+            DiagonalMatrix<int> matrix = new DiagonalMatrix<int>(4);
+            matrix.AddActionWhenElementChanged(3, 3, () => { Console.WriteLine("Test Works!!!"); matrix[2, 2] = 140; });
+
+            matrix[3, 3] = 169;
+
+            Assert.AreEqual(140, matrix[2, 2]);
+        }
+
+        /// <summary>
+        /// Test of matrix' behavior on changing object outside the main diagonal
+        /// </summary>
+        [Test]
+        public void Test_SettingObjectOutsideTheDiagonal()
+        {
+            DiagonalMatrix<int> matrix = new DiagonalMatrix<int>(4);
+
+            matrix[3, 1] = 169;
+
+            Assert.AreEqual(0, matrix[3, 1]);
+
+            SymmetricalMatrix<int> second = new SymmetricalMatrix<int>(10);
+
+            second[1, 5] = 184;
+
+            Assert.AreEqual(184, second[1, 5]);
+            Assert.AreEqual(184, second[5, 1]);
         }
     }
 }
