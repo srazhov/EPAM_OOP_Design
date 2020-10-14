@@ -1,1 +1,1 @@
-# EPAM_OOP_Design
+# EPAM: OOP Design
